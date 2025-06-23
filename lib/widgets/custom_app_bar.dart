@@ -18,35 +18,65 @@ class CustomAppBar extends StatelessWidget {
               'Nikhil Pareek',
               style: Theme.of(context).textTheme.displayLarge,
             ),
-            Row(
-              children: [
-                _buildIconBtn(
-                  icon: FontAwesomeIcons.github,
-                  url: 'https://github.com/nikkhilpareek',
-                  tooltip: 'GitHub',
-                ),
-                const SizedBox(width: 16),
-                _buildIconBtn(
-                  icon: FontAwesomeIcons.linkedin,
-                  url: 'https://www.linkedin.com/in/nikkhil-pareek/',
-                  tooltip: 'LinkedIn',
-                ),
-                const SizedBox(width: 16),
-                _buildIconBtn(
-                  icon: FontAwesomeIcons.envelope,
-                  url: 'mailto:nikhilpareekpandit@gmail.com',
-                  tooltip: 'Email',
-                ),
-                const SizedBox(width: 16),
-                _buildIconBtn(
-                  icon: FontAwesomeIcons.instagram,
-                  url: 'https://instagram.com/nikkhil.pareek',
-                  tooltip: 'Instagram',
-                ),
-                const SizedBox(width: 16),
-                _buildThemeToggleBtn(context),
-              ],
-            ),
+            isMobile
+                ? Wrap(
+                    spacing: 8,
+                    runSpacing: 4,
+                    alignment: WrapAlignment.end,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.github,
+                        url: 'https://github.com/nikkhilpareek',
+                        tooltip: 'GitHub',
+                      ),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.linkedin,
+                        url: 'https://www.linkedin.com/in/nikkhil-pareek/',
+                        tooltip: 'LinkedIn',
+                      ),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.envelope,
+                        url: 'mailto:nikhilpareekpandit@gmail.com',
+                        tooltip: 'Email',
+                      ),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.instagram,
+                        url: 'https://instagram.com/nikkhil.pareek',
+                        tooltip: 'Instagram',
+                      ),
+                      _buildThemeToggleBtn(context),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.github,
+                        url: 'https://github.com/nikkhilpareek',
+                        tooltip: 'GitHub',
+                      ),
+                      const SizedBox(width: 16),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.linkedin,
+                        url: 'https://www.linkedin.com/in/nikkhil-pareek/',
+                        tooltip: 'LinkedIn',
+                      ),
+                      const SizedBox(width: 16),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.envelope,
+                        url: 'mailto:nikhilpareekpandit@gmail.com',
+                        tooltip: 'Email',
+                      ),
+                      const SizedBox(width: 16),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.instagram,
+                        url: 'https://instagram.com/nikkhil.pareek',
+                        tooltip: 'Instagram',
+                      ),
+                      const SizedBox(width: 16),
+                      _buildThemeToggleBtn(context),
+                    ],
+                  ),
           ],
         );
       },

@@ -21,45 +21,83 @@ class ProjectCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 700;
     return Padding(
       padding: const EdgeInsets.only(bottom: 40),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
+      child: isMobile
+          ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  timeRange,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                // Text content
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      timeRange,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.displaySmall,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      description,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildTryItOutButton(),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.displaySmall,
+                const SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 180,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: _ProjectImageHover(),
+                  ),
                 ),
-                const SizedBox(height: 8),
-                Text(
-                  description,
-                  style: Theme.of(context).textTheme.bodyMedium,
+              ],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        timeRange,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        title,
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        description,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 16),
+                      _buildTryItOutButton(),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 16),
-                _buildTryItOutButton(),
+                const SizedBox(width: 32),
+                SizedBox(
+                  width: 360,
+                  height: 203,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: _ProjectImageHover(),
+                  ),
+                ),
               ],
             ),
-          ),
-          const SizedBox(width: 32),
-          SizedBox(
-            width: 360,
-            height: 203,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: _ProjectImageHover(),
-            ),
-          ),
-        ],
-      ),
     );
   }
 

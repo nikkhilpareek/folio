@@ -7,6 +7,7 @@ class ExperienceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 700;
     final experiences = [
       _ExperienceCard(
         logo: 'assets/images/dynamicore.jpeg',
@@ -69,75 +70,124 @@ class _ExperienceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isMobile = MediaQuery.of(context).size.width < 700;
+    final logoSize = isMobile ? 48.0 : 64.0;
+    final borderRadius = isMobile ? 12.0 : 16.0;
+    final contentSpacing = isMobile ? 16.0 : 32.0;
+    final bottomPadding = isMobile ? 32.0 : 40.0;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 40),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Logo on the left
-          Container(
-            width: 64,
-            height: 64,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: theme.colorScheme.surface.withOpacity(0.7),
-              border: Border.all(
-                color: theme.dividerColor.withOpacity(0.08),
-                width: 1.2,
-              ),
-            ),
-            clipBehavior: Clip.hardEdge,
-            child: Image.asset(
-              logo,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => const Icon(Icons.business, size: 32),
-            ),
-          ),
-          const SizedBox(width: 32),
-          // Main content and date
-          Expanded(
-            child: Row(
+      padding: EdgeInsets.only(bottom: bottomPadding),
+      child: isMobile
+          ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Main content
+                Row(
+                  children: [
+                    Container(
+                      width: logoSize,
+                      height: logoSize,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        color: theme.colorScheme.surface.withOpacity(0.7),
+                        border: Border.all(
+                          color: theme.dividerColor.withOpacity(0.08),
+                          width: 1.2,
+                        ),
+                      ),
+                      clipBehavior: Clip.hardEdge,
+                      child: Image.asset(
+                        logo,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Icon(Icons.business, size: logoSize * 0.5),
+                      ),
+                    ),
+                    SizedBox(width: contentSpacing),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(title, style: theme.textTheme.titleMedium),
+                          SizedBox(height: 4),
+                          Text('$company · $type', style: theme.textTheme.bodySmall),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Text(location, style: theme.textTheme.bodySmall),
+                SizedBox(height: 4),
+                Text(date, style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500)),
+              ],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Logo on the left
+                Container(
+                  width: logoSize,
+                  height: logoSize,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(borderRadius),
+                    color: theme.colorScheme.surface.withOpacity(0.7),
+                    border: Border.all(
+                      color: theme.dividerColor.withOpacity(0.08),
+                      width: 1.2,
+                    ),
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  child: Image.asset(
+                    logo,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Icon(Icons.business, size: logoSize * 0.5),
+                  ),
+                ),
+                SizedBox(width: contentSpacing),
+                // Main content and date
                 Expanded(
-                  child: Column(
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        title,
-                        style: theme.textTheme.displaySmall,
+                      // Main content
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              title,
+                              style: theme.textTheme.displaySmall,
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              '$company · $type',
+                              style: theme.textTheme.bodyMedium,
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              location,
+                              style: theme.textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        '$company · $type',
-                        style: theme.textTheme.bodyMedium,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        location,
-                        style: theme.textTheme.bodySmall,
+                      // Date on the right
+                      Padding(
+                        padding: const EdgeInsets.only(left: 16.0, top: 2.0),
+                        child: Text(
+                          date,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: theme.textTheme.bodySmall?.color?.withOpacity(0.85),
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ],
                   ),
                 ),
-                // Date on the right
-                Padding(
-                  padding: const EdgeInsets.only(left: 16.0, top: 2.0),
-                  child: Text(
-                    date,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: theme.textTheme.bodySmall?.color?.withOpacity(0.85),
-                      fontWeight: FontWeight.w500,
-                    ),
-                    textAlign: TextAlign.right,
-                  ),
-                ),
               ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -10,58 +10,90 @@ class HeroSection extends StatelessWidget {
         final bool isMobile = constraints.maxWidth < 700;
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 64),
-          child: Flex(
-            direction: isMobile ? Axis.vertical : Axis.horizontal,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Text content
-              Expanded(
-                flex: 2,
-                child: Column(
-                  crossAxisAlignment: isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+          child: isMobile
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       "Welcome to My Portfolio",
                       style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Theme.of(context).textTheme.displayLarge?.color,
-              ),
-                      textAlign: isMobile ? TextAlign.center : TextAlign.left,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).textTheme.displayLarge?.color,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 24),
-                    SizedBox(
-                      width: isMobile ? double.infinity : 400,
-                      child: Text(
-                        "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter. Currently exploring the world of app development, I'm gaining hands-on experience through internships, projects, and constant learning.",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        textAlign: isMobile ? TextAlign.center : TextAlign.left,
-                      ),
+                    Text(
+                      "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter. Currently exploring the world of app development, I'm gaining hands-on experience through internships, projects, and constant learning.",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 32),
                     _buildResumeButton(),
+                    const SizedBox(height: 32),
+                    Center(
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/images/hero.jpg',
+                          width: 160,
+                          height: 160,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Flex(
+                  direction: Axis.horizontal,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Welcome to My Portfolio",
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).textTheme.displayLarge?.color,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                          const SizedBox(height: 24),
+                          SizedBox(
+                            width: 400,
+                            child: Text(
+                              "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter. Currently exploring the world of app development, I'm gaining hands-on experience through internships, projects, and constant learning.",
+                              style: Theme.of(context).textTheme.bodyMedium,
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                          const SizedBox(height: 32),
+                          _buildResumeButton(),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 48, height: 48),
+                    Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: ClipOval(
+                          child: Image.asset(
+                            'assets/images/hero.jpg',
+                            width: 200,
+                            height: 200,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              const SizedBox(width: 48, height: 48),
-              // Image
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: ClipOval(
-                    child: Image.asset(
-                      'assets/images/hero.jpg',
-                      width: 200,
-                      height: 200,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
         );
       },
     );
@@ -70,7 +102,6 @@ class HeroSection extends StatelessWidget {
   Widget _buildResumeButton() {
     return _ResumeHoverButton();
   }
-
 }
 
 class _ResumeHoverButton extends StatefulWidget {
