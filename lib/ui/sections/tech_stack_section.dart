@@ -18,29 +18,48 @@ class TechStackSection extends StatelessWidget {
       _TechStackItem('SQL', 'assets/images/sql.png'),
       _TechStackItem('VS Code', 'assets/images/vsc.png'),
     ];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Tech Stack', style: Theme.of(context).textTheme.displayMedium),
-        const SizedBox(height: 16),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: List.generate(
-              techs.length,
-              (i) => Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: _AnimatedTechStackWidget(
-                  item: techs[i],
-                  delay: Duration(milliseconds: 100 * i),
-                ),
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(height: 32),
-      ],
+    
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final bool isMobile = constraints.maxWidth < 700;
+        
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Tech Stack', style: Theme.of(context).textTheme.displayMedium),
+            const SizedBox(height: 16),
+            isMobile
+                ? Wrap(
+                    spacing: 32.0,
+                    runSpacing: 20.0,
+                    children: List.generate(
+                      techs.length,
+                      (i) => _AnimatedTechStackWidget(
+                        item: techs[i],
+                        delay: Duration(milliseconds: 100 * i),
+                      ),
+                    ),
+                  )
+                : SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: List.generate(
+                        techs.length,
+                        (i) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: _AnimatedTechStackWidget(
+                            item: techs[i],
+                            delay: Duration(milliseconds: 100 * i),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+            const SizedBox(height: 32),
+          ],
+        );
+      },
     );
   }
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:flutter/services.dart';
+import 'dart:html' as html;
+import 'dart:typed_data';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
@@ -15,24 +18,6 @@ class HeroSection extends StatelessWidget {
               ? Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      "Welcome to My Portfolio",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).textTheme.displayLarge?.color,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(
-                      "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter. Currently exploring the world of app development, I'm gaining hands-on experience through internships, projects, and constant learning.",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 32),
-                    _buildResumeButton(),
-                    const SizedBox(height: 32),
                     Center(
                       child: Stack(
                         clipBehavior: Clip.none,
@@ -53,6 +38,24 @@ class HeroSection extends StatelessWidget {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 32),
+                    Text(
+                      "Welcome to My Portfolio",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).textTheme.displayLarge?.color,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter. Currently exploring the world of app development, I'm gaining hands-on experience through internships, projects, and constant learning.",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 32),
+                    _buildResumeButton(),
                   ],
                 )
               : Flex(
@@ -306,8 +309,33 @@ class _ResumeHoverButtonState extends State<_ResumeHoverButton>
                 child: Material(
                   color: Colors.transparent,
                   child: InkWell(
-                    onTap: () {
-                      // Download resume logic
+                    onTap: () async {
+                      try {
+                        // Load the PDF from assets
+                        final ByteData data = await rootBundle.load('assets/resume.pdf');
+                        final Uint8List bytes = data.buffer.asUint8List();
+                        
+                        // Create a blob and download it
+                        final blob = html.Blob([bytes]);
+                        final url = html.Url.createObjectUrlFromBlob(blob);
+                        final anchor = html.document.createElement('a') as html.AnchorElement
+                          ..href = url
+                          ..style.display = 'none'
+                          ..download = 'Nikhil_Pareek_Resume.pdf';
+                        html.document.body?.children.add(anchor);
+                        anchor.click();
+                        html.document.body?.children.remove(anchor);
+                        html.Url.revokeObjectUrl(url);
+                      } catch (e) {
+                        // Handle error - show a snackbar or dialog
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Error downloading resume. Please try again.'),
+                            ),
+                          );
+                        }
+                      }
                     },
                     onTapDown: (details) {
                       _startRipple(details.globalPosition);

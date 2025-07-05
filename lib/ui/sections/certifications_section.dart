@@ -161,6 +161,16 @@ class _CertificationCardState extends State<_CertificationCard> {
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Image first on mobile
+                SizedBox(
+                  width: double.infinity,
+                  height: 180,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: _CertificationImageHover(),
+                  ),
+                ),
+                const SizedBox(height: 20),
                 // Text content
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,15 +196,6 @@ class _CertificationCardState extends State<_CertificationCard> {
                     const SizedBox(height: 16),
                     _buildVerifyButton(),
                   ],
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 180,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: _CertificationImageHover(),
-                  ),
                 ),
               ],
             )

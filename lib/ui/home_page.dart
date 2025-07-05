@@ -26,7 +26,9 @@ class HomePage extends StatelessWidget {
                   : constraints.maxWidth * 0.7;
 
           // Apply side padding for small screens
-          final sidePadding = isSmallScreen ? 24.0 : 0.0;
+          final sidePadding = isSmallScreen 
+              ? (constraints.maxWidth < 400 ? 16.0 : 24.0) 
+              : 0.0;
 
           return SingleChildScrollView(
             child: Center(

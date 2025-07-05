@@ -191,6 +191,15 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
                                 ],
                               ),
                             ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(widget.date, style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500)),
+                                SizedBox(height: 4),
+                                Text(widget.location, style: theme.textTheme.bodySmall),
+                              ],
+                            ),
+                            SizedBox(width: 8),
                             AnimatedBuilder(
                               animation: _iconRotation,
                               builder: (context, child) {
@@ -206,10 +215,6 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
                             ),
                           ],
                         ),
-                        SizedBox(height: 8),
-                        Text(widget.location, style: theme.textTheme.bodySmall),
-                        SizedBox(height: 4),
-                        Text(widget.date, style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500)),
                       ],
                     )
                   : Row(

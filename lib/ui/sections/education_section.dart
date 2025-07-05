@@ -180,16 +180,86 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
-                                        child: Text(
-                                          widget.degree,
-                                          style: theme.textTheme.titleMedium?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              widget.degree,
+                                              style: theme.textTheme.titleMedium?.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 4),
+                                            Text(
+                                              widget.field,
+                                              style: theme.textTheme.bodyMedium?.copyWith(
+                                                color: Colors.blue.shade300,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              widget.institution,
+                                              style: theme.textTheme.bodySmall,
+                                            ),
+                                            Text(
+                                              widget.location,
+                                              style: theme.textTheme.bodySmall?.copyWith(
+                                                color: theme.textTheme.bodySmall?.color?.withOpacity(0.7),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      if (widget.highlights != null && widget.highlights!.isNotEmpty)
+                                      Column(
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                                            decoration: BoxDecoration(
+                                              color: Colors.blue.shade600.withOpacity(0.1),
+                                              borderRadius: BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color: Colors.blue.shade400.withOpacity(0.3),
+                                                width: 0.5,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              widget.duration,
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.blue.shade400,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                                            decoration: BoxDecoration(
+                                              color: Colors.green.shade600.withOpacity(0.1),
+                                              borderRadius: BorderRadius.circular(8),
+                                              border: Border.all(
+                                                color: Colors.green.shade400.withOpacity(0.3),
+                                                width: 0.5,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              widget.gpa,
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.green.shade400,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      if (widget.highlights != null && widget.highlights!.isNotEmpty) ...[
+                                        const SizedBox(width: 8),
                                         AnimatedBuilder(
                                           animation: _iconRotation,
                                           builder: (context, child) {
@@ -203,78 +273,12 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                                             );
                                           },
                                         ),
+                                      ],
                                     ],
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    widget.field,
-                                    style: theme.textTheme.bodyMedium?.copyWith(
-                                      color: Colors.blue.shade300,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    widget.institution,
-                                    style: theme.textTheme.bodySmall,
-                                  ),
-                                  Text(
-                                    widget.location,
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: theme.textTheme.bodySmall?.color?.withOpacity(0.7),
-                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
-                        const SizedBox(height: 16),
-                        // Duration and GPA
-                        Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.blue.shade600.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: Colors.blue.shade400.withOpacity(0.3),
-                                  width: 0.5,
-                                ),
-                              ),
-                              child: Text(
-                                widget.duration,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.blue.shade400,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 8),
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: Colors.green.shade600.withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: Colors.green.shade400.withOpacity(0.3),
-                                  width: 0.5,
-                                ),
-                              ),
-                              child: Text(
-                                widget.gpa,
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.green.shade400,
-                                ),
-                              ),
-                            ),
-                            // Invisible spacer to maintain alignment
-                            if (widget.highlights == null || widget.highlights!.isEmpty)
-                              const SizedBox(width: 36), // Same width as arrow + padding
                           ],
                         ),
                       ],

@@ -35,6 +35,16 @@ class _ProjectCardState extends State<ProjectCard> {
           ? Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Image first on mobile
+                SizedBox(
+                  width: double.infinity,
+                  height: 180,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: _ProjectImageHover(),
+                  ),
+                ),
+                const SizedBox(height: 20),
                 // Text content
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,10 +58,6 @@ class _ProjectCardState extends State<ProjectCard> {
                       widget.title,
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
-                    if (widget.skills != null && widget.skills!.isNotEmpty) ...[
-                      const SizedBox(height: 6),
-                      _buildSkillsRow(),
-                    ],
                     const SizedBox(height: 8),
                     Text(
                       widget.description,
@@ -60,15 +66,6 @@ class _ProjectCardState extends State<ProjectCard> {
                     const SizedBox(height: 16),
                     _buildTryItOutButton(),
                   ],
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 180,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: _ProjectImageHover(),
-                  ),
                 ),
               ],
             )
