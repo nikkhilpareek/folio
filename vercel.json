@@ -27,5 +27,17 @@
         }
       ]
     }
+  ],
+  "builds": [
+    {
+      "src": "pubspec.yaml",
+      "use": "vercel-flutter@0.2.0"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }

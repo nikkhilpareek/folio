@@ -25,21 +25,36 @@ migrate_working_dir/
 
 # Flutter/Dart/Pub related
 **/doc/api/
-**/ios/Flutter/.last_build_id
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.xcconfig
+**/ios/Flutter/release.xcconfig
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/RunnerTests/GeneratedPluginRegistrant.*
+**/macos/Flutter/Flutter-Debug.xcconfig
+**/macos/Flutter/Flutter-Release.xcconfig
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/flutter_export_environment.sh
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.pub-cache/
+**/.pub/
 .dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.pub-cache/
-.pub/
-/build/
+**/.dart_tool/
+pubspec.lock
 
-# Symbolication related
-app.*.symbols
+# Build folders - exclude specific platforms only
+build/android/
+build/ios/
+build/linux/
+build/macos/
+build/windows/
+build/app/
+build/flutter_assets/
+build/kernel_snapshot.dill
+build/snapshot_blob.bin.d
 
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Explicitly include web build for Vercel deployment
+!build/web/
