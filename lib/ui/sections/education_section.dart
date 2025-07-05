@@ -31,7 +31,7 @@ class EducationSection extends StatelessWidget {
             duration: '2022 - 2026',
             gpa: '8.1 CGPA',
             highlights: [
-              'Relevant Coursework: Data Structures and Algorithms, Database Management Systems, Software Engineering, Mobile App Developement',
+              'Relevant Coursework: Data Structures and Algorithms, Database Management Systems, Software Engineering, Mobile App Development',
               'Coordinated in Various Clubs (Astronomy, Drama, Quiz, Tech)',
               'Participated in multiple hackathons and coding competitions',
             ],

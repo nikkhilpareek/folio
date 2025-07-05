@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter/services.dart';
-import 'dart:html' as html;
 import 'dart:typed_data';
+// Web-specific import
+import 'dart:html' as html show Blob, Url, window;
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
@@ -315,26 +316,20 @@ class _ResumeHoverButtonState extends State<_ResumeHoverButton>
                         final ByteData data = await rootBundle.load('assets/resume.pdf');
                         final Uint8List bytes = data.buffer.asUint8List();
                         
-                        // Create a blob and download it
-                        final blob = html.Blob([bytes]);
+                        // Create a blob and open it in new tab for viewing
+                        final blob = html.Blob([bytes], 'application/pdf');
                         final url = html.Url.createObjectUrlFromBlob(blob);
-                        final anchor = html.document.createElement('a') as html.AnchorElement
-                          ..href = url
-                          ..style.display = 'none'
-                          ..download = 'Nikhil_Pareek_Resume.pdf';
-                        html.document.body?.children.add(anchor);
-                        anchor.click();
-                        html.document.body?.children.remove(anchor);
-                        html.Url.revokeObjectUrl(url);
+                        
+                        // Open PDF in new tab for viewing
+                        html.window.open(url, '_blank');
+                        
+                        // Clean up the URL after a delay
+                        Future.delayed(const Duration(seconds: 1), () {
+                          html.Url.revokeObjectUrl(url);
+                        });
                       } catch (e) {
-                        // Handle error - show a snackbar or dialog
-                        if (context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Error downloading resume. Please try again.'),
-                            ),
-                          );
-                        }
+                        // Silently fail - no banner shown
+                        print('Error viewing resume: $e');
                       }
                     },
                     onTapDown: (details) {
@@ -347,13 +342,13 @@ class _ResumeHoverButtonState extends State<_ResumeHoverButton>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Icon(
-                            Icons.download,
+                            Icons.visibility,
                             color: Colors.white,
                             size: 18,
                           ),
                           const SizedBox(width: 10),
                           const Text(
-                            'Download Resume',
+                            'View Resume',
                             style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,

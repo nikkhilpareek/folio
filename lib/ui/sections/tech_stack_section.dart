@@ -7,16 +7,34 @@ class TechStackSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final techs = [
+      // Mobile Development
       _TechStackItem('Flutter', 'assets/images/flutter.png'),
       _TechStackItem('Dart', 'assets/images/dart.png'),
+      _TechStackItem('Kotlin', 'assets/images/kotlin.png'),
+      
+      // Programming Languages
       _TechStackItem('C++', 'assets/images/cpp.png'),
-      _TechStackItem('Firebase', 'assets/images/firebase.png'),
-      _TechStackItem('FastAPI', 'assets/images/fapi.png'),
-      _TechStackItem('Figma', 'assets/images/figma.png'),
-      _TechStackItem('Git', 'assets/images/git.png'),
       _TechStackItem('Solidity', 'assets/images/solidity.png'),
+      
+      // Backend & APIs
+      _TechStackItem('NodeJS', 'assets/images/nodejs.png'),
+      _TechStackItem('FastAPI', 'assets/images/fapi.png'),
+      _TechStackItem('Rest API', 'assets/images/restapi.png'),
+      
+      // Databases
+      _TechStackItem('Firebase', 'assets/images/firebase.png'),
+      _TechStackItem('PostgreSQL', 'assets/images/postgresql.png'),
       _TechStackItem('SQL', 'assets/images/sql.png'),
+      
+      // Development Tools
       _TechStackItem('VS Code', 'assets/images/vsc.png'),
+      _TechStackItem('Android Studio', 'assets/images/androidstudio.png'),
+      _TechStackItem('Git', 'assets/images/git.png'),
+      _TechStackItem('Docker', 'assets/images/docker.png'),
+      _TechStackItem('Postman', 'assets/images/postman.png'),
+      
+      // Design
+      _TechStackItem('Figma', 'assets/images/figma.png'),
     ];
     
     return LayoutBuilder(
@@ -28,34 +46,17 @@ class TechStackSection extends StatelessWidget {
           children: [
             Text('Tech Stack', style: Theme.of(context).textTheme.displayMedium),
             const SizedBox(height: 16),
-            isMobile
-                ? Wrap(
-                    spacing: 32.0,
-                    runSpacing: 20.0,
-                    children: List.generate(
-                      techs.length,
-                      (i) => _AnimatedTechStackWidget(
-                        item: techs[i],
-                        delay: Duration(milliseconds: 100 * i),
-                      ),
-                    ),
-                  )
-                : SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: List.generate(
-                        techs.length,
-                        (i) => Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: _AnimatedTechStackWidget(
-                            item: techs[i],
-                            delay: Duration(milliseconds: 100 * i),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+            Wrap(
+              spacing: isMobile ? 32.0 : 40.0,
+              runSpacing: isMobile ? 20.0 : 24.0,
+              children: List.generate(
+                techs.length,
+                (i) => _AnimatedTechStackWidget(
+                  item: techs[i],
+                  delay: Duration(milliseconds: 100 * i),
+                ),
+              ),
+            ),
             const SizedBox(height: 32),
           ],
         );

@@ -20,7 +20,7 @@ class ExperienceSection extends StatelessWidget {
           'Designed and Developed fintech mobile app with various features including financial education system and virtual trading simulator',
           'Implemented cross-platform Flutter app with 15+ screens including portfolio management and loan calculators',
           'Presented gamified financial learning platform with XP points and achievement tracking system',
-          'Implemented AI chat bot for analysing investment portfolio'
+          'Implemented AI chat bot for analyzing investment portfolio'
         ],
       ),
       _ExperienceCard(
@@ -31,10 +31,10 @@ class ExperienceSection extends StatelessWidget {
         date: 'Aug 2024 - Dec 2024 · 5 mos',
         location: 'Jaipur · On-site',
         workDetails: [
-          'Assisted professor in teaching Statistics and Data Visulaisation using Python Programming',
+          'Assisted professor in teaching Statistics and Data Visualization using Python Programming',
           'Mentored 60+ students in coding assignments and project development',
           'Conducted lab sessions and helped students debug complex programming issues',
-          'Organized Mock project building session on data visualisation',
+          'Organized Mock project building session on data visualization',
         ],
       ),
       _ExperienceCard(
@@ -48,8 +48,8 @@ class ExperienceSection extends StatelessWidget {
           'Analyzed large datasets using Python, Pandas, and NumPy for business insights',
           'Created interactive dashboards using Tableau for stakeholders',
           'Performed statistical analysis and data visualization to identify trends',
-          'Developed a Java based Web App for data visualisation',
-          'Integrated Vega-lite for Improved data visualisation',
+          'Developed a Java based Web App for data visualization',
+          'Integrated Vega-lite for Improved data visualization',
         ],
       ),
       _ExperienceCard(
