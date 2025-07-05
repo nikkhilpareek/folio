@@ -3,8 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final VoidCallback? onThemeToggle;
-  const CustomAppBar({super.key, this.onThemeToggle});
+  const CustomAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,6 @@ class CustomAppBar extends StatelessWidget {
                         url: 'https://instagram.com/nikkhil.pareek',
                         tooltip: 'Instagram',
                       ),
-                      _buildThemeToggleBtn(context),
                     ],
                   )
                 : Row(
@@ -73,8 +71,6 @@ class CustomAppBar extends StatelessWidget {
                         url: 'https://instagram.com/nikkhil.pareek',
                         tooltip: 'Instagram',
                       ),
-                      const SizedBox(width: 16),
-                      _buildThemeToggleBtn(context),
                     ],
                   ),
           ],
@@ -97,14 +93,6 @@ class CustomAppBar extends StatelessWidget {
           await launchUrl(uri, mode: LaunchMode.externalApplication);
         }
       },
-    );
-  }
-
-  Widget _buildThemeToggleBtn(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.brightness_6, size: 22),
-      tooltip: 'Toggle Theme',
-      onPressed: onThemeToggle ?? () {},
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import '../../widgets/project_card.dart';
 import '../sections/experience_section.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,7 +13,6 @@ class ProjectsSection extends StatefulWidget {
 
 class _ProjectsSectionState extends State<ProjectsSection> {
   int _selectedIndex = 0;
-  final List<String> _tabs = ['Projects', 'Experience'];
 
   @override
   Widget build(BuildContext context) {
@@ -22,39 +22,42 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         Center(
           child: Container(
             margin: const EdgeInsets.only(bottom: 32),
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: List.generate(_tabs.length, (index) {
-                final isSelected = _selectedIndex == index;
-                return GestureDetector(
-                  onTap: () => setState(() => _selectedIndex = index),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? Theme.of(context).colorScheme.background
-                          : Colors.transparent,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: isSelected
-                          ? [BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0,2))]
-                          : [],
-                    ),
-                    child: Text(
-                      _tabs[index],
-                      style: TextStyle(
-                        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                        color: isSelected
-                            ? Theme.of(context).colorScheme.onBackground
-                            : Theme.of(context).textTheme.bodyMedium?.color,
-                      ),
+            child: CupertinoSlidingSegmentedControl<int>(
+              groupValue: _selectedIndex,
+              onValueChanged: (int? value) {
+                if (value != null) {
+                  setState(() => _selectedIndex = value);
+                }
+              },
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              thumbColor: Theme.of(context).colorScheme.background,
+              padding: const EdgeInsets.all(4),
+              children: {
+                0: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  child: Text(
+                    'Projects',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: _selectedIndex == 0
+                          ? Theme.of(context).colorScheme.onBackground
+                          : Theme.of(context).textTheme.bodyMedium?.color,
                     ),
                   ),
-                );
-              }),
+                ),
+                1: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  child: Text(
+                    'Experience',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: _selectedIndex == 1
+                          ? Theme.of(context).colorScheme.onBackground
+                          : Theme.of(context).textTheme.bodyMedium?.color,
+                    ),
+                  ),
+                ),
+              },
             ),
           ),
         ),
@@ -77,22 +80,25 @@ class _ProjectsSectionState extends State<ProjectsSection> {
           imageUrl: 'assets/images/ryder.png',
           liveUrl: 'https://nikkhilpareek.github.io/ryder/',
           githubUrl: 'https://github.com/nikkhilpareek/ryder',
+          skills: ['Flutter', 'Dart', 'Firebase', 'OpenStreetMap API', 'Glass UI'],
         ),
         ProjectCard(
-          timeRange: '2018 - present',
-          title: 'CryptoTrack - Blockchain Portfolio',
-          description: 'A comprehensive cryptocurrency tracking platform that allows users to monitor market movements, manage their portfolio, and analyze performance with interactive visualizations and real-time data.',
-          imageUrl: 'assets/images/crypto.png',
+          timeRange: 'July 2025',
+          title: 'Fylez - Blockchain based Cloud Storage',
+            description: 'A decentralized cloud storage platform leveraging blockchain technology for secure, private, and tamper-proof file storage. Users can upload, share, and manage files easily on their phones with the power of blockchain.',
+          imageUrl: 'assets/images/fylez-proj.png',
           liveUrl: 'https://cryptotrack.example.com',
-          githubUrl: 'https://github.com/nikhilpareek/cryptotrack',
+          githubUrl: 'https://github.com/nikkhilpareek/fylez',
+          skills: ['Flutter', 'Node.js', 'Blockchain', 'Dart', 'Pinata API',]
         ),
         ProjectCard(
-          timeRange: '2016 - present',
-          title: 'EcoScan - Sustainable Shopping',
-          description: 'An app that helps consumers make environmentally conscious decisions by scanning product barcodes and providing sustainability ratings, ethical production information, and eco-friendly alternatives.',
-          imageUrl: 'assets/images/ecoscan.png',
-          liveUrl: 'https://ecoscan.example.com',
-          githubUrl: 'https://github.com/nikhilpareek/ecoscan',
+          timeRange: 'July 2025',
+          title: 'Habits - A Minimal Habit Tracker',
+          description: 'Build better habits, one day at a time. A beautifully minimal habit tracker that focuses on consistency over complexity. Track your daily routines with clean UI, and Calendar View.',
+          imageUrl: 'assets/images/habits.png',
+          // liveUrl: 'https://ecoscan.example.com',
+          githubUrl: 'https://github.com/nikkhilpareek/habit',
+          skills: ['Flutter', 'Dart', 'Bloc', 'Material Design'],
         ),
       ],
     );

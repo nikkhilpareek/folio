@@ -73,7 +73,7 @@ class HeroSection extends StatelessWidget {
                               textAlign: TextAlign.left,
                             ),
                           ),
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 20),
                           _buildResumeButton(),
                         ],
                       ),
@@ -109,30 +109,194 @@ class _ResumeHoverButton extends StatefulWidget {
   State<_ResumeHoverButton> createState() => _ResumeHoverButtonState();
 }
 
-class _ResumeHoverButtonState extends State<_ResumeHoverButton> {
+class _ResumeHoverButtonState extends State<_ResumeHoverButton>
+    with TickerProviderStateMixin {
   bool _hovering = false;
+  late AnimationController _rippleController;
+  late Animation<double> _rippleAnimation;
+  late Animation<double> _rippleOpacity;
+  Offset _rippleCenter = Offset.zero;
+  GlobalKey _buttonKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _rippleController = AnimationController(
+      duration: const Duration(milliseconds: 400),
+      vsync: this,
+    );
+    _rippleAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: _rippleController,
+      curve: Curves.easeOutQuart,
+    ));
+    _rippleOpacity = Tween<double>(
+      begin: 0.8,
+      end: 0.0,
+    ).animate(CurvedAnimation(
+      parent: _rippleController,
+      curve: Curves.easeOut,
+    ));
+  }
+
+  @override
+  void dispose() {
+    _rippleController.dispose();
+    super.dispose();
+  }
+
+  void _startRipple(Offset globalPosition) {
+    RenderBox? renderBox = _buttonKey.currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox != null) {
+      Offset localPosition = renderBox.globalToLocal(globalPosition);
+      setState(() {
+        _rippleCenter = localPosition;
+      });
+      _rippleController.reset();
+      _rippleController.forward();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (_) => setState(() => _hovering = true),
-      onExit: (_) => setState(() => _hovering = false),
-      child: AnimatedScale(
-        scale: _hovering ? 1.08 : 1.0,
-        duration: const Duration(milliseconds: 150),
-        curve: Curves.easeOut,
-        child: ElevatedButton.icon(
-          onPressed: () {
-            // Download resume logic
-          },
-          icon: const Icon(Icons.download, size: 18),
-          label: const Text('Download resume'),
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            textStyle: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
+      onEnter: (_) {
+        setState(() => _hovering = true);
+      },
+      onExit: (_) {
+        setState(() => _hovering = false);
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: _hovering
+              ? [
+                  BoxShadow(
+                    color: Colors.blue.shade300.withOpacity(0.4),
+                    blurRadius: 20,
+                    offset: const Offset(0, 0),
+                    spreadRadius: 2,
+                  ),
+                ]
+              : [],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Stack(
+            key: _buttonKey,
+            children: [
+              // Background button
+              AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                width: 260,
+                height: 50,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: _hovering
+                        ? [Colors.blue.shade600, Colors.blue.shade800]
+                        : [Colors.grey.shade700, Colors.grey.shade900],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+              ),
+              // Ripple effect
+              AnimatedBuilder(
+                animation: _rippleAnimation,
+                builder: (context, child) {
+                  return CustomPaint(
+                    painter: _RipplePainter(
+                      center: _rippleCenter,
+                      radius: _rippleAnimation.value * 300,
+                      opacity: _rippleOpacity.value,
+                    ),
+                    size: const Size(260, 50),
+                  );
+                },
+              ),
+              // Button content
+              Container(
+                width: 260,
+                height: 50,
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      // Download resume logic
+                    },
+                    onTapDown: (details) {
+                      _startRipple(details.globalPosition);
+                    },
+                    borderRadius: BorderRadius.circular(8),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(
+                            Icons.download,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                          const SizedBox(width: 10),
+                          const Text(
+                            'Download Resume',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
+                          ),
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 300),
+                            margin: EdgeInsets.only(left: _hovering ? 8 : 4),
+                            child: const Icon(
+                              Icons.arrow_forward,
+                              color: Colors.white,
+                              size: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
+  }
+}
+
+class _RipplePainter extends CustomPainter {
+  final Offset center;
+  final double radius;
+  final double opacity;
+
+  _RipplePainter({
+    required this.center,
+    required this.radius,
+    required this.opacity,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (opacity > 0) {
+      final paint = Paint()
+        ..color = Colors.white.withOpacity(opacity * 0.3)
+        ..style = PaintingStyle.fill;
+
+      canvas.drawCircle(center, radius, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }

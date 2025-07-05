@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProjectCard extends StatelessWidget {
+class ProjectCard extends StatefulWidget {
   final String timeRange;
   final String title;
   final String description;
   final String? imageUrl;
   final String? liveUrl;
   final String? githubUrl;
+  final List<String>? skills;
   
   const ProjectCard({
     super.key,
@@ -17,8 +18,14 @@ class ProjectCard extends StatelessWidget {
     this.imageUrl,
     this.liveUrl,
     this.githubUrl,
+    this.skills,
   });
 
+  @override
+  State<ProjectCard> createState() => _ProjectCardState();
+}
+
+class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 700;
@@ -33,17 +40,21 @@ class ProjectCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      timeRange,
+                      widget.timeRange,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      title,
+                      widget.title,
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
+                    if (widget.skills != null && widget.skills!.isNotEmpty) ...[
+                      const SizedBox(height: 6),
+                      _buildSkillsRow(),
+                    ],
                     const SizedBox(height: 8),
                     Text(
-                      description,
+                      widget.description,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 16),
@@ -69,17 +80,21 @@ class ProjectCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        timeRange,
+                        widget.timeRange,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        title,
+                        widget.title,
                         style: Theme.of(context).textTheme.displaySmall,
                       ),
+                      if (widget.skills != null && widget.skills!.isNotEmpty) ...[
+                        const SizedBox(height: 6),
+                        _buildSkillsRow(),
+                      ],
                       const SizedBox(height: 8),
                       Text(
-                        description,
+                        widget.description,
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(height: 16),
@@ -104,10 +119,10 @@ class ProjectCard extends StatelessWidget {
   Widget _buildTryItOutButton() {
     return Row(
       children: [
-        if (liveUrl != null)
+        if (widget.liveUrl != null)
           ElevatedButton.icon(
             onPressed: () async {
-              final uri = Uri.parse(liveUrl!);
+              final uri = Uri.parse(widget.liveUrl!);
               if (await canLaunchUrl(uri)) {
                 await launchUrl(uri, mode: LaunchMode.externalApplication);
               }
@@ -119,17 +134,47 @@ class ProjectCard extends StatelessWidget {
               textStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
           ),
-        if (liveUrl != null) const SizedBox(width: 12),
+        if (widget.liveUrl != null) const SizedBox(width: 12),
         _buildGithubButton(),
       ],
     );
   }
 
+  Widget _buildSkillsRow() {
+    return Wrap(
+      spacing: 6,
+      runSpacing: 4,
+      children: widget.skills!.map((skill) => _buildSkillDot(skill)).toList(),
+    );
+  }
+
+  Widget _buildSkillDot(String skill) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: Colors.blue.shade600.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: Colors.blue.shade400.withOpacity(0.4),
+          width: 0.5,
+        ),
+      ),
+      child: Text(
+        skill,
+        style: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+          color: Colors.blue.shade400,
+        ),
+      ),
+    );
+  }
+
   Widget _buildGithubButton() {
     return OutlinedButton.icon(
-      onPressed: githubUrl != null
+      onPressed: widget.githubUrl != null
           ? () async {
-              final uri = Uri.parse(githubUrl!);
+              final uri = Uri.parse(widget.githubUrl!);
               if (await canLaunchUrl(uri)) {
                 await launchUrl(uri, mode: LaunchMode.externalApplication);
               }
@@ -156,8 +201,8 @@ class _ProjectImageHoverState extends State<_ProjectImageHover> {
   @override
   Widget build(BuildContext context) {
     // Get access to the ProjectCard's imageUrl
-    final ProjectCard projectCard = context.findAncestorWidgetOfExactType<ProjectCard>()!;
-    final String imageUrl = projectCard.imageUrl ?? 'assets/images/placeholder.png';
+    final _ProjectCardState projectCardState = context.findAncestorStateOfType<_ProjectCardState>()!;
+    final String imageUrl = projectCardState.widget.imageUrl ?? 'assets/images/placeholder.png';
     
     return MouseRegion(
       onEnter: (_) => setState(() => _hovering = true),

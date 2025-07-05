@@ -3,12 +3,12 @@ import '../widgets/custom_app_bar.dart';
 import 'sections/hero_section.dart';
 import 'sections/projects_section.dart';
 import 'sections/tech_stack_section.dart';
+import 'sections/education_section.dart';
 import 'sections/certifications_section.dart';
 import 'sections/footer_section.dart';
 
 class HomePage extends StatelessWidget {
-  final VoidCallback? onThemeToggle;
-  const HomePage({super.key, this.onThemeToggle});
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +38,14 @@ class HomePage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 32),
-                      CustomAppBar(onThemeToggle: onThemeToggle),
+                      const CustomAppBar(),
                       const HeroSection(),
                       const ProjectsSection(),
                       const TechStackSection(),
+                      const EducationSection(),
                       const CertificationsSection(),
                       const FooterSection(),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 4),
                     ],
                   ),
                 ),

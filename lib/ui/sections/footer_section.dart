@@ -8,12 +8,25 @@ class FooterSection extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 32),
-        child: Text(
-          'made by Nikhil Pareek with a lot of caffeine and Prompts',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Colors.grey[600],
-                fontStyle: FontStyle.italic,
+        child: RichText(
+          text: TextSpan(
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.white,
+                  fontStyle: FontStyle.italic,
+                ),
+            children: [
+              const TextSpan(text: 'Made by '),
+              TextSpan(
+                text: 'Nikhil Pareek',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
+              const TextSpan(text: ' with a lot of caffeine and prompts'),
+            ],
+          ),
           textAlign: TextAlign.center,
         ),
       ),
