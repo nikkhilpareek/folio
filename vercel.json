@@ -1,12 +1,31 @@
 {
-  "buildCommand": "flutter build web",
+  "functions": {
+    "app/api/**/*.dart": {
+      "runtime": "vercel-dart@1.0.0"
+    }
+  },
+  "github": {
+    "silent": true
+  },
+  "buildCommand": "flutter build web --release",
   "outputDirectory": "build/web",
-  "installCommand": "curl -fsSL https://flutter.dev/docs/get-started/install/linux | bash && export PATH=\"$PATH:/vercel/.flutter/bin\" && flutter doctor && flutter pub get",
+  "installCommand": "if [ ! -d \"/vercel/.flutter\" ]; then git clone https://github.com/flutter/flutter.git -b stable /vercel/.flutter; fi && export PATH=\"$PATH:/vercel/.flutter/bin\" && flutter doctor -v && flutter pub get",
   "framework": null,
   "rewrites": [
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
     }
   ]
 }
