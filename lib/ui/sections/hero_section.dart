@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
@@ -33,13 +34,23 @@ class HeroSection extends StatelessWidget {
                     _buildResumeButton(),
                     const SizedBox(height: 32),
                     Center(
-                      child: ClipOval(
-                        child: Image.asset(
-                          'assets/images/hero.jpg',
-                          width: 160,
-                          height: 160,
-                          fit: BoxFit.cover,
-                        ),
+                      child: Stack(
+                        clipBehavior: Clip.none,
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          ClipOval(
+                            child: Image.asset(
+                              'assets/images/hero.jpg',
+                              width: 160,
+                              height: 160,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 1,
+                            child: _buildOpenForWorkChip(),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -82,13 +93,23 @@ class HeroSection extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Center(
-                        child: ClipOval(
-                          child: Image.asset(
-                            'assets/images/hero.jpg',
-                            width: 200,
-                            height: 200,
-                            fit: BoxFit.cover,
-                          ),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          alignment: Alignment.bottomCenter,
+                          children: [
+                            ClipOval(
+                              child: Image.asset(
+                                'assets/images/hero.jpg',
+                                width: 200,
+                                height: 200,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: 1,
+                              child: _buildOpenForWorkChip(),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -96,6 +117,67 @@ class HeroSection extends StatelessWidget {
                 ),
         );
       },
+    );
+  }
+
+  Widget _buildOpenForWorkChip() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            const Color(0xFF00E676),
+            const Color(0xFF00C853),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF00E676).withOpacity(0.4),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+            spreadRadius: 0,
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+            spreadRadius: 0,
+          ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(2),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              shape: BoxShape.circle,
+            ),
+            child: Container(
+              width: 6,
+              height: 6,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+          const SizedBox(width: 6),
+          const Text(
+            'Open to Work!',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 12,
+              letterSpacing: 0.3,
+            ),
+          ),
+        ],
+      ),
     );
   }
 

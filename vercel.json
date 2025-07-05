@@ -1,0 +1,12 @@
+{
+  "buildCommand": "flutter build web",
+  "outputDirectory": "build/web",
+  "installCommand": "curl -fsSL https://flutter.dev/docs/get-started/install/linux | bash && export PATH=\"$PATH:/vercel/.flutter/bin\" && flutter doctor && flutter pub get",
+  "framework": null,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
