@@ -10,7 +10,6 @@ class CustomAppBar extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final bool isMobile = constraints.maxWidth < 768;
-        final bool isVerySmall = constraints.maxWidth < 400;
         
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -19,45 +18,40 @@ class CustomAppBar extends StatelessWidget {
               child: Text(
                 'Nikhil Pareek',
                 style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: isVerySmall ? 20 : null,
+                  fontSize: isMobile ? 22 : null,
                 ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),
             isMobile
-                ? Flexible(
-                    child: Wrap(
-                      spacing: isVerySmall ? 2 : 4,
-                      runSpacing: 4,
-                      alignment: WrapAlignment.end,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        _buildIconBtn(
-                          icon: FontAwesomeIcons.github,
-                          url: 'https://github.com/nikkhilpareek',
-                          tooltip: 'GitHub',
-                          size: isVerySmall ? 16 : 18,
-                        ),
-                        _buildIconBtn(
-                          icon: FontAwesomeIcons.linkedin,
-                          url: 'https://www.linkedin.com/in/nikkhil-pareek/',
-                          tooltip: 'LinkedIn',
-                          size: isVerySmall ? 16 : 18,
-                        ),
-                        _buildIconBtn(
-                          icon: FontAwesomeIcons.envelope,
-                          url: 'mailto:nikhilpareekpandit@gmail.com',
-                          tooltip: 'Email',
-                          size: isVerySmall ? 16 : 18,
-                        ),
-                        _buildIconBtn(
-                          icon: FontAwesomeIcons.instagram,
-                          url: 'https://instagram.com/nikkhil.pareek',
-                          tooltip: 'Instagram',
-                          size: isVerySmall ? 16 : 18,
-                        ),
-                      ],
-                    ),
+                ? Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.github,
+                        url: 'https://github.com/nikkhilpareek',
+                        tooltip: 'GitHub',
+                        size: 16,
+                      ),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.linkedin,
+                        url: 'https://www.linkedin.com/in/nikkhil-pareek/',
+                        tooltip: 'LinkedIn',
+                        size: 16,
+                      ),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.envelope,
+                        url: 'mailto:nikhilpareekpandit@gmail.com',
+                        tooltip: 'Email',
+                        size: 16,
+                      ),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.instagram,
+                        url: 'https://instagram.com/nikkhil.pareek',
+                        tooltip: 'Instagram',
+                        size: 16,
+                      ),
+                    ],
                   )
                 : Row(
                     children: [
@@ -102,9 +96,10 @@ class CustomAppBar extends StatelessWidget {
     return IconButton(
       icon: FaIcon(icon, size: iconSize),
       tooltip: tooltip,
-      constraints: iconSize < 18 
-          ? const BoxConstraints(minWidth: 32, minHeight: 32) 
+      constraints: iconSize <= 16 
+          ? const BoxConstraints(minWidth: 28, minHeight: 28) 
           : const BoxConstraints(minWidth: 36, minHeight: 36),
+      padding: iconSize <= 16 ? const EdgeInsets.all(4) : null,
       onPressed: () async {
         final uri = Uri.parse(url);
         if (await canLaunchUrl(uri)) {

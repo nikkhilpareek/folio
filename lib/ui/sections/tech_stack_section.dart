@@ -47,8 +47,9 @@ class TechStackSection extends StatelessWidget {
             Text('Tech Stack', style: Theme.of(context).textTheme.displayMedium),
             const SizedBox(height: 16),
             Wrap(
-              spacing: isMobile ? 32.0 : 40.0,
-              runSpacing: isMobile ? 20.0 : 24.0,
+              spacing: isMobile ? 16.0 : 40.0,
+              runSpacing: isMobile ? 16.0 : 24.0,
+              alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
               children: List.generate(
                 techs.length,
                 (i) => _AnimatedTechStackWidget(
@@ -94,6 +95,7 @@ class _AnimatedTechStackWidgetState extends State<_AnimatedTechStackWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 700;
     return AnimatedOpacity(
       opacity: _opacity,
       duration: const Duration(milliseconds: 500),
@@ -102,11 +104,15 @@ class _AnimatedTechStackWidgetState extends State<_AnimatedTechStackWidget> {
         children: [
           Image.asset(
             widget.item.assetPath,
-            width: 32,
-            height: 32,
+            width: isMobile ? 28 : 32,
+            height: isMobile ? 28 : 32,
           ),
-          const SizedBox(height: 8),
-          Text(widget.item.name, style: const TextStyle(fontSize: 14)),
+          SizedBox(height: isMobile ? 6 : 8),
+          Text(
+            widget.item.name, 
+            style: TextStyle(fontSize: isMobile ? 12 : 14),
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

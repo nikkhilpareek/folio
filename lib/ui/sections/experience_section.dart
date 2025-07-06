@@ -7,7 +7,6 @@ class ExperienceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 700;
     final experiences = [
       _ExperienceCard(
         logo: 'assets/images/dynamicore.jpeg',
@@ -144,7 +143,7 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
     final isMobile = MediaQuery.of(context).size.width < 700;
     final logoSize = isMobile ? 48.0 : 64.0;
     final borderRadius = isMobile ? 12.0 : 16.0;
-    final contentSpacing = isMobile ? 16.0 : 32.0;
+    final contentSpacing = isMobile ? 12.0 : 32.0;
     final bottomPadding = isMobile ? 32.0 : 40.0;
 
     return Padding(
@@ -161,6 +160,7 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               width: logoSize,
@@ -185,21 +185,38 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(widget.title, style: theme.textTheme.titleMedium),
+                                  Text(
+                                    widget.title, 
+                                    style: theme.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                   SizedBox(height: 4),
-                                  Text('${widget.company} · ${widget.type}', style: theme.textTheme.bodySmall),
+                                  Text(
+                                    '${widget.company} · ${widget.type}', 
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8),
+                                  Text(
+                                    widget.date, 
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blue.shade300,
+                                    ),
+                                  ),
+                                  SizedBox(height: 2),
+                                  Text(
+                                    widget.location, 
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      fontSize: 12,
+                                      color: theme.textTheme.bodySmall?.color?.withOpacity(0.7),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(widget.date, style: theme.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w500)),
-                                SizedBox(height: 4),
-                                Text(widget.location, style: theme.textTheme.bodySmall),
-                              ],
-                            ),
-                            SizedBox(width: 8),
                             AnimatedBuilder(
                               animation: _iconRotation,
                               builder: (context, child) {
