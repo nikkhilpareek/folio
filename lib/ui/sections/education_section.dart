@@ -38,7 +38,7 @@ class EducationSection extends StatelessWidget {
           ),
           
           _EducationCard(
-            logo: 'assets/images/school.png',
+            logo: 'assets/images/jklu.jpg', // Use a placeholder or existing icon
             degree: 'Senior Secondary (XII)',
             field: 'Science Stream (PCM)',
             institution: 'R.V.N. Sr. Sec. School',
@@ -48,7 +48,7 @@ class EducationSection extends StatelessWidget {
           ),
 
           _EducationCard(
-            logo: 'assets/images/school.png',
+            logo: 'assets/images/jklu.jpg', // Use a placeholder or existing icon
             degree: 'Secondary (X)',
             field: 'Science Stream (PCM)',
             institution: 'R.V.N. Sr. Sec. School',
@@ -136,7 +136,7 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
     final contentSpacing = isMobile ? 16.0 : 32.0;
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 32),
+      padding: EdgeInsets.only(bottom: isMobile ? 24 : 32),
       child: Column(
         children: [
           InkWell(
@@ -174,92 +174,25 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                                 ),
                               ),
                             ),
-                            SizedBox(width: contentSpacing),
+                            const SizedBox(width: 12),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  // Title and expand icon
                                   Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Expanded(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              widget.degree,
-                                              style: theme.textTheme.titleMedium?.copyWith(
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 4),
-                                            Text(
-                                              widget.field,
-                                              style: theme.textTheme.bodyMedium?.copyWith(
-                                                color: Colors.blue.shade300,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            const SizedBox(height: 8),
-                                            Text(
-                                              widget.institution,
-                                              style: theme.textTheme.bodySmall,
-                                            ),
-                                            Text(
-                                              widget.location,
-                                              style: theme.textTheme.bodySmall?.copyWith(
-                                                color: theme.textTheme.bodySmall?.color?.withOpacity(0.7),
-                                              ),
-                                            ),
-                                          ],
+                                        child: Text(
+                                          widget.degree,
+                                          style: theme.textTheme.titleSmall?.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 14,
+                                          ),
                                         ),
                                       ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                                            decoration: BoxDecoration(
-                                              color: Colors.blue.shade600.withOpacity(0.1),
-                                              borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(
-                                                color: Colors.blue.shade400.withOpacity(0.3),
-                                                width: 0.5,
-                                              ),
-                                            ),
-                                            child: Text(
-                                              widget.duration,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.blue.shade400,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(height: 8),
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                                            decoration: BoxDecoration(
-                                              color: Colors.green.shade600.withOpacity(0.1),
-                                              borderRadius: BorderRadius.circular(8),
-                                              border: Border.all(
-                                                color: Colors.green.shade400.withOpacity(0.3),
-                                                width: 0.5,
-                                              ),
-                                            ),
-                                            child: Text(
-                                              widget.gpa,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.green.shade400,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      if (widget.highlights != null && widget.highlights!.isNotEmpty) ...[
-                                        const SizedBox(width: 8),
+                                      if (widget.highlights != null && widget.highlights!.isNotEmpty)
                                         AnimatedBuilder(
                                           animation: _iconRotation,
                                           builder: (context, child) {
@@ -267,13 +200,82 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                                               angle: _iconRotation.value * 3.14159,
                                               child: Icon(
                                                 Icons.keyboard_arrow_down,
-                                                size: 20,
+                                                size: 18,
                                                 color: theme.textTheme.bodySmall?.color,
                                               ),
                                             );
                                           },
                                         ),
-                                      ],
+                                    ],
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    widget.field,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: Colors.blue.shade300,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    widget.institution,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      fontSize: 11,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.location,
+                                    style: theme.textTheme.bodySmall?.copyWith(
+                                      color: theme.textTheme.bodySmall?.color?.withOpacity(0.7),
+                                      fontSize: 11,
+                                      height: 1.2,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 6),
+                                  // Duration and GPA chips in a row
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                        decoration: BoxDecoration(
+                                          color: Colors.blue.shade600.withOpacity(0.1),
+                                          borderRadius: BorderRadius.circular(6),
+                                          border: Border.all(
+                                            color: Colors.blue.shade400.withOpacity(0.3),
+                                            width: 0.5,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          widget.duration,
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.blue.shade400,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                        decoration: BoxDecoration(
+                                          color: Colors.green.shade600.withOpacity(0.1),
+                                          borderRadius: BorderRadius.circular(6),
+                                          border: Border.all(
+                                            color: Colors.green.shade400.withOpacity(0.3),
+                                            width: 0.5,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          widget.gpa,
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.green.shade400,
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -449,18 +451,22 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: Colors.blue.shade300,
+                          fontSize: isMobile ? 12 : null,
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: isMobile ? 8 : 12),
                       ...(widget.highlights?.map((highlight) => Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
+                        padding: EdgeInsets.only(bottom: isMobile ? 6 : 8),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              margin: const EdgeInsets.only(top: 6, right: 12),
-                              width: 4,
-                              height: 4,
+                              margin: EdgeInsets.only(
+                                top: isMobile ? 4 : 6, 
+                                right: isMobile ? 8 : 12,
+                              ),
+                              width: isMobile ? 3 : 4,
+                              height: isMobile ? 3 : 4,
                               decoration: BoxDecoration(
                                 color: Colors.blue.shade400,
                                 shape: BoxShape.circle,
@@ -470,7 +476,8 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                               child: Text(
                                 highlight,
                                 style: theme.textTheme.bodySmall?.copyWith(
-                                  height: 1.4,
+                                  height: 1.3,
+                                  fontSize: isMobile ? 11 : null,
                                 ),
                               ),
                             ),

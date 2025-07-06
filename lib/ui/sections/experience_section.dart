@@ -141,10 +141,10 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isMobile = MediaQuery.of(context).size.width < 700;
-    final logoSize = isMobile ? 48.0 : 64.0;
-    final borderRadius = isMobile ? 12.0 : 16.0;
-    final contentSpacing = isMobile ? 12.0 : 32.0;
-    final bottomPadding = isMobile ? 32.0 : 40.0;
+    final logoSize = isMobile ? 40.0 : 64.0;
+    final borderRadius = isMobile ? 10.0 : 16.0;
+    final contentSpacing = isMobile ? 10.0 : 32.0;
+    final bottomPadding = isMobile ? 24.0 : 40.0;
 
     return Padding(
       padding: EdgeInsets.only(bottom: bottomPadding),
@@ -154,7 +154,7 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
             onTap: _toggleExpand,
             borderRadius: BorderRadius.circular(12),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(isMobile ? 4.0 : 8.0),
               child: isMobile
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -189,28 +189,30 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
                                     widget.title, 
                                     style: theme.textTheme.titleMedium?.copyWith(
                                       fontWeight: FontWeight.w600,
+                                      fontSize: 15,
                                     ),
                                   ),
-                                  SizedBox(height: 4),
+                                  SizedBox(height: 3),
                                   Text(
                                     '${widget.company} · ${widget.type}', 
                                     style: theme.textTheme.bodySmall?.copyWith(
-                                      fontSize: 13,
+                                      fontSize: 12,
                                     ),
                                   ),
-                                  SizedBox(height: 8),
+                                  SizedBox(height: 6),
                                   Text(
                                     widget.date, 
                                     style: theme.textTheme.bodySmall?.copyWith(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.blue.shade300,
+                                      fontSize: 11,
                                     ),
                                   ),
-                                  SizedBox(height: 2),
+                                  SizedBox(height: 1),
                                   Text(
                                     widget.location, 
                                     style: theme.textTheme.bodySmall?.copyWith(
-                                      fontSize: 12,
+                                      fontSize: 11,
                                       color: theme.textTheme.bodySmall?.color?.withOpacity(0.7),
                                     ),
                                   ),
@@ -224,7 +226,7 @@ class _ExperienceCardState extends State<_ExperienceCard> with SingleTickerProvi
                                   angle: _iconRotation.value * 3.14159,
                                   child: Icon(
                                     Icons.keyboard_arrow_down,
-                                    size: 20,
+                                    size: 18,
                                     color: theme.textTheme.bodySmall?.color,
                                   ),
                                 );
