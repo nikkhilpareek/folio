@@ -76,7 +76,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         ProjectCard(
           timeRange: 'May 2025',
           title: 'Ryder - Car Rental made easy',
-          description: "Skip the queues, skip the paperwork. Ryder lets you book any self-drive car in under 60 seconds with just your phone. From interactive maps to instant booking, we've reimagined car rental with a sleek glassmorphic dark UI that makes finding your perfect ride effortless.",
+          description: "Skip the boring paperwork! 🚗 Book any car in under 60 seconds with just your phone. Features sleek glassmorphic UI because why settle for ordinary?",
           imageUrl: 'assets/images/ryder.png',
           liveUrl: 'https://nikkhilpareek.github.io/ryder/',
           githubUrl: 'https://github.com/nikkhilpareek/ryder',
@@ -85,7 +85,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         ProjectCard(
           timeRange: 'July 2025',
           title: 'Fylez - Blockchain based Cloud Storage',
-            description: 'A decentralized cloud storage platform leveraging blockchain technology for secure, private, and tamper-proof file storage. Users can upload, share, and manage files easily on their phones with the power of blockchain.',
+            description: 'Your files, but make it blockchain! 🔗 Secure, private, and tamper-proof cloud storage that actually respects your privacy.',
           imageUrl: 'assets/images/fylez-proj.png',
           liveUrl: 'https://cryptotrack.example.com',
           githubUrl: 'https://github.com/nikkhilpareek/fylez',
@@ -94,11 +94,20 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         ProjectCard(
           timeRange: 'July 2025',
           title: 'Habits - A Minimal Habit Tracker',
-          description: 'Build better habits, one day at a time. A beautifully minimal habit tracker that focuses on consistency over complexity. Track your daily routines with clean UI, and Calendar View.',
+          description: 'Build better habits without the overwhelm! ✨ Clean, minimal design that focuses on what matters - consistency over complexity.',
           imageUrl: 'assets/images/habits.png',
           // liveUrl: 'https://ecoscan.example.com',
           githubUrl: 'https://github.com/nikkhilpareek/habit',
           skills: ['Flutter', 'Dart', 'Bloc', 'Material Design'],
+        ),
+        ProjectCard(
+          timeRange: 'July 2025',
+          title: 'Auth - Minimal Authentication Screens',
+          description: 'Because every app needs auth screens! 🔐 Built this minimal, reusable set so you (and I) never have to start from scratch again.',
+          imageUrl: 'assets/images/auth.png',
+          liveUrl: 'https://nikkhilpareek.github.io/Minimal-Auth-Screens-in-Flutter/',
+          githubUrl: 'https://github.com/nikkhilpareek/Minimal-Auth-Screens-in-Flutter',
+          skills: ['Flutter', 'Dart', 'Lottie', 'Minimal Design'],
         ),
       ],
     );

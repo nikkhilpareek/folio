@@ -15,7 +15,7 @@ class FooterSection extends StatelessWidget {
                   fontStyle: FontStyle.italic,
                 ),
             children: [
-              const TextSpan(text: 'Made by '),
+              const TextSpan(text: 'Made in Flutter by '),
               TextSpan(
                 text: 'Nikhil Pareek',
                 style: TextStyle(

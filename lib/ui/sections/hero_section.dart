@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:flutter/services.dart';
-import 'dart:typed_data';
 // Web-specific import
+// ignore: deprecated_member_use
 import 'dart:html' as html show Blob, Url, window;
 
 class HeroSection extends StatelessWidget {
@@ -51,7 +50,7 @@ class HeroSection extends StatelessWidget {
                     ),
                     const SizedBox(height: 24),
                     Text(
-                      "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter. Currently exploring the world of app development, I'm gaining hands-on experience through internships, projects, and constant learning.",
+                      "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter.",
                       style: Theme.of(context).textTheme.bodyMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -83,7 +82,7 @@ class HeroSection extends StatelessWidget {
                           SizedBox(
                             width: 400,
                             child: Text(
-                              "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter. Currently exploring the world of app development, I'm gaining hands-on experience through internships, projects, and constant learning.",
+                              "I'm a Computer Science undergrad passionate about building clean, functional mobile apps using Flutter.",
                               style: Theme.of(context).textTheme.bodyMedium,
                               textAlign: TextAlign.left,
                             ),

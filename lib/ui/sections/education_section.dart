@@ -23,7 +23,7 @@ class EducationSection extends StatelessWidget {
           
           // Education cards
           _EducationCard(
-            logo: 'assets/images/jklu.jpg',
+            logo: 'assets/images/jkluu.png',
             degree: 'Bachelor of Technology (B.Tech)',
             field: 'Computer Science & Engineering',
             institution: 'JK Lakshmipat University',
@@ -38,7 +38,7 @@ class EducationSection extends StatelessWidget {
           ),
           
           _EducationCard(
-            logo: 'assets/images/jklu.jpg', // Use a placeholder or existing icon
+            logo: 'assets/images/school.png',
             degree: 'Senior Secondary (XII)',
             field: 'Science Stream (PCM)',
             institution: 'R.V.N. Sr. Sec. School',
@@ -48,7 +48,7 @@ class EducationSection extends StatelessWidget {
           ),
 
           _EducationCard(
-            logo: 'assets/images/jklu.jpg', // Use a placeholder or existing icon
+            logo: 'assets/images/school.png',
             degree: 'Secondary (X)',
             field: 'Science Stream (PCM)',
             institution: 'R.V.N. Sr. Sec. School',
@@ -132,7 +132,6 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
     final theme = Theme.of(context);
     final isMobile = MediaQuery.of(context).size.width < 700;
     final logoSize = isMobile ? 48.0 : 64.0;
-    final borderRadius = isMobile ? 12.0 : 16.0;
     final contentSpacing = isMobile ? 16.0 : 32.0;
 
     return Padding(
@@ -152,26 +151,15 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
+                            Image.asset(
+                              widget.logo,
                               width: logoSize,
                               height: logoSize,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(borderRadius),
-                                color: theme.colorScheme.surface.withOpacity(0.7),
-                                border: Border.all(
-                                  color: theme.dividerColor.withOpacity(0.08),
-                                  width: 1.2,
-                                ),
-                              ),
-                              clipBehavior: Clip.hardEdge,
-                              child: Image.asset(
-                                widget.logo,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) => Icon(
-                                  Icons.school,
-                                  size: logoSize * 0.5,
-                                  color: theme.textTheme.bodySmall?.color,
-                                ),
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) => Icon(
+                                Icons.school,
+                                size: logoSize * 0.5,
+                                color: theme.textTheme.bodySmall?.color,
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -289,26 +277,15 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Desktop layout: Logo on left
-                        Container(
+                        Image.asset(
+                          widget.logo,
                           width: logoSize,
                           height: logoSize,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(borderRadius),
-                            color: theme.colorScheme.surface.withOpacity(0.7),
-                            border: Border.all(
-                              color: theme.dividerColor.withOpacity(0.08),
-                              width: 1.2,
-                            ),
-                          ),
-                          clipBehavior: Clip.hardEdge,
-                          child: Image.asset(
-                            widget.logo,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) => Icon(
-                              Icons.school,
-                              size: logoSize * 0.5,
-                              color: theme.textTheme.bodySmall?.color,
-                            ),
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) => Icon(
+                            Icons.school,
+                            size: logoSize * 0.5,
+                            color: theme.textTheme.bodySmall?.color,
                           ),
                         ),
                         SizedBox(width: contentSpacing),
