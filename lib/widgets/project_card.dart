@@ -8,6 +8,7 @@ class ProjectCard extends StatefulWidget {
   final String? imageUrl;
   final String? liveUrl;
   final String? githubUrl;
+  final String? figmaUrl;
   final List<String>? skills;
   
   const ProjectCard({
@@ -18,6 +19,7 @@ class ProjectCard extends StatefulWidget {
     this.imageUrl,
     this.liveUrl,
     this.githubUrl,
+    this.figmaUrl,
     this.skills,
   });
 
@@ -133,6 +135,8 @@ class _ProjectCardState extends State<ProjectCard> {
           ),
         if (widget.liveUrl != null) const SizedBox(width: 12),
         _buildGithubButton(),
+        if (widget.figmaUrl != null) const SizedBox(width: 12),
+        if (widget.figmaUrl != null) _buildFigmaButton(),
       ],
     );
   }
@@ -182,6 +186,39 @@ class _ProjectCardState extends State<ProjectCard> {
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         textStyle: const TextStyle(fontSize: 14),
+      ),
+    );
+  }
+
+  Widget _buildFigmaButton() {
+    return OutlinedButton(
+      onPressed: widget.figmaUrl != null
+          ? () async {
+              final uri = Uri.parse(widget.figmaUrl!);
+              if (await canLaunchUrl(uri)) {
+                await launchUrl(uri, mode: LaunchMode.externalApplication);
+              }
+            }
+          : null,
+      style: OutlinedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        textStyle: const TextStyle(fontSize: 14),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            'assets/images/figma.png',
+            width: 18,
+            height: 18,
+            errorBuilder: (context, error, stackTrace) => const Icon(
+              Icons.design_services,
+              size: 18,
+            ),
+          ),
+          const SizedBox(width: 8),
+          const Text('Design'),
+        ],
       ),
     );
   }
