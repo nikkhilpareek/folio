@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 // Web-specific import
 // ignore: deprecated_member_use
-import 'dart:html' as html show Blob, Url, window;
+import 'dart:html' as html show window;
 
 class HeroSection extends StatelessWidget {
   const HeroSection({super.key});
@@ -311,24 +312,24 @@ class _ResumeHoverButtonState extends State<_ResumeHoverButton>
                   child: InkWell(
                     onTap: () async {
                       try {
-                        // Load the PDF from assets
-                        final ByteData data = await rootBundle.load('assets/resume.pdf');
-                        final Uint8List bytes = data.buffer.asUint8List();
-                        
-                        // Create a blob and open it in new tab for viewing
-                        final blob = html.Blob([bytes], 'application/pdf');
-                        final url = html.Url.createObjectUrlFromBlob(blob);
-                        
-                        // Open PDF in new tab for viewing
-                        html.window.open(url, '_blank');
-                        
-                        // Clean up the URL after a delay
-                        Future.delayed(const Duration(seconds: 1), () {
-                          html.Url.revokeObjectUrl(url);
-                        });
+                        // Method 1: Direct URL approach (most reliable)
+                        const resumeUrl = 'assets/resume.pdf';
+                        if (await canLaunchUrl(Uri.parse(resumeUrl))) {
+                          await launchUrl(
+                            Uri.parse(resumeUrl),
+                            mode: LaunchMode.externalApplication,
+                          );
+                        } else {
+                          // Fallback: Use direct window.open for web
+                          html.window.open('assets/resume.pdf', '_blank');
+                        }
                       } catch (e) {
-                        // Silently fail - no banner shown
-                        print('Error viewing resume: $e');
+                        // Final fallback: Direct HTML approach
+                        try {
+                          html.window.open('assets/resume.pdf', '_blank');
+                        } catch (fallbackError) {
+                          print('Error opening resume: $fallbackError');
+                        }
                       }
                     },
                     onTapDown: (details) {
