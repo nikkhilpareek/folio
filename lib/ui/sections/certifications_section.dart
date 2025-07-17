@@ -16,7 +16,7 @@ class _CertificationsSectionState extends State<CertificationsSection> {
     {
       'dateRange': 'June 2025',
       'title': 'Flutter & Dart - Complete App Development Course',
-      'description': 'Comprehensive course covering Flutter framework, Dart programming, mobile app development, state management, and best practices for building cross-platform applications.',
+      'description': 'Comprehensive course on Flutter, Dart, mobile app development, state management, and cross-platform best practices.',
       'issuer': 'Packt',
       'imageUrl': 'assets/images/packt.png',
       'verifyUrl': 'https://coursera.org/verify/specialization/UJOZIKWGJTGD',
@@ -25,7 +25,7 @@ class _CertificationsSectionState extends State<CertificationsSection> {
     {
       'dateRange': 'July 2025',
       'title': 'Designing User Interfaces and Experiences (UI/UX)',
-      'description': 'Comprehensive course on user interface design, user experience principles, design thinking, prototyping, and creating intuitive digital experiences authorized by IBM.',
+      'description': 'Comprehensive course on UI design, UX principles, design thinking, prototyping, and intuitive digital experiences.',
       'issuer': 'IBM',
       'imageUrl': 'assets/images/uiuxibm.png',
       'verifyUrl': 'https://coursera.org/verify/T3GZLQOFDY0X',
@@ -34,7 +34,7 @@ class _CertificationsSectionState extends State<CertificationsSection> {
     {
       'dateRange': 'July 2025',
       'title': 'Flutter and Dart: Developing iOS, Android, and Mobile Apps',
-      'description': 'Advanced course covering Flutter framework and Dart programming for developing cross-platform mobile applications for iOS, Android, and mobile platforms authorized by IBM.',
+      'description': 'Advanced course on Flutter and Dart for building cross-platform mobile apps for iOS, Android, and other platforms.',
       'issuer': 'IBM',
       'imageUrl': 'assets/images/flutteranddartibm.png',
       'verifyUrl': 'https://coursera.org/verify/YA3D6C3084GG',
@@ -43,7 +43,7 @@ class _CertificationsSectionState extends State<CertificationsSection> {
     {
       'dateRange': 'September 2024',
       'title': 'Blockchain Specialization',
-      'description': 'Comprehensive 4-course specialization covering blockchain fundamentals, smart contracts, decentralized applications, and blockchain platforms from University at Buffalo.',
+      'description': 'Comprehensive 4-course specialization on blockchain fundamentals, smart contracts, dApps, and blockchain platforms.',
       'issuer': 'University at Buffalo',
       'imageUrl': 'assets/images/blockchainspecialisation.png',
       'verifyUrl': 'https://coursera.org/verify/specialization/KTQRADW50TUD',
