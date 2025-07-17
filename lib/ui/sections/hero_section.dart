@@ -341,12 +341,6 @@ class _ResumeHoverButtonState extends State<_ResumeHoverButton>
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
-                            Icons.visibility,
-                            color: Colors.white,
-                            size: 18,
-                          ),
-                          const SizedBox(width: 10),
                           const Text(
                             'View Resume',
                             style: TextStyle(
