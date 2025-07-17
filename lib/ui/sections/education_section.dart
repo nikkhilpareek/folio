@@ -38,7 +38,7 @@ class EducationSection extends StatelessWidget {
           ),
           
           _EducationCard(
-            logo: 'assets/images/school.png',
+            logo: 'assets/images/rvn.png',
             degree: 'Senior Secondary (XII)',
             field: 'Science Stream (PCM)',
             institution: 'R.V.N. Sr. Sec. School',
@@ -48,9 +48,8 @@ class EducationSection extends StatelessWidget {
           ),
 
           _EducationCard(
-            logo: 'assets/images/school.png',
+            logo: 'assets/images/rvn.png',
             degree: 'Secondary (X)',
-            field: 'Science Stream (PCM)',
             institution: 'R.V.N. Sr. Sec. School',
             location: 'Gharsana, Rajasthan, India',
             duration: '2019',
@@ -65,17 +64,17 @@ class EducationSection extends StatelessWidget {
 class _EducationCard extends StatefulWidget {
   final String logo;
   final String degree;
-  final String field;
+  final String? field;
   final String institution;
   final String location;
   final String duration;
   final String gpa;
   final List<String>? highlights;
-  
+
   const _EducationCard({
     required this.logo,
     required this.degree,
-    required this.field,
+    this.field,
     required this.institution,
     required this.location,
     required this.duration,
@@ -197,14 +196,15 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                                     ],
                                   ),
                                   const SizedBox(height: 2),
-                                  Text(
-                                    widget.field,
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: Colors.blue.shade300,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 12,
+                                  if (widget.field != null && widget.field!.isNotEmpty)
+                                    Text(
+                                      widget.field!,
+                                      style: theme.textTheme.bodySmall?.copyWith(
+                                        color: Colors.blue.shade300,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 12,
+                                      ),
                                     ),
-                                  ),
                                   const SizedBox(height: 4),
                                   Text(
                                     widget.institution,
@@ -305,13 +305,14 @@ class _EducationCardState extends State<_EducationCard> with SingleTickerProvide
                                       ),
                                     ),
                                     const SizedBox(height: 4),
-                                    Text(
-                                      widget.field,
-                                      style: theme.textTheme.bodyMedium?.copyWith(
-                                        color: Colors.blue.shade300,
-                                        fontWeight: FontWeight.w500,
+                                    if (widget.field != null && widget.field!.isNotEmpty)
+                                      Text(
+                                        widget.field!,
+                                        style: theme.textTheme.bodyMedium?.copyWith(
+                                          color: Colors.blue.shade300,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
                                     const SizedBox(height: 8),
                                     Text(
                                       widget.institution,
