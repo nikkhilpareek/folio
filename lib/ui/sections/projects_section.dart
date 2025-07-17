@@ -75,7 +75,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
       ProjectCard(
         timeRange: 'May 2025',
         title: 'Ryder - Car Rental made easy',
-        description: "Skip the boring paperwork! 🚗 Book any car in under 60 seconds with just your phone. Features sleek glassmorphic UI because why settle for ordinary?",
+        description: "Skip the boring paperwork! Book any car in under 60 seconds with just your phone. Features sleek glassmorphic UI because why settle for ordinary?",
         imageUrl: 'assets/images/ryder.png',
         liveUrl: 'https://nikkhilpareek.github.io/ryder/',
         githubUrl: 'https://github.com/nikkhilpareek/ryder',
@@ -84,8 +84,18 @@ class _ProjectsSectionState extends State<ProjectsSection> {
       ),
       ProjectCard(
         timeRange: 'July 2025',
+        title: 'ToxCheck - Know Additives and Allergens',
+          description: 'Curious about what’s really in your food? ToxCheck helps you spot additives and allergens instantly. Search, check, eat smart!',
+        imageUrl: 'assets/images/toxcheck.png',
+        liveUrl: 'http://nikkhilpareek.github.io/ToxCheck/',
+        githubUrl: 'https://github.com/nikkhilpareek/ToxCheck',
+        skills: ['Flutter', 'Dart', 'Hive', 'OpenFoodFacts API', 'Figma',],
+        figmaUrl: 'https://www.figma.com/design/eCppOZZtgFNbxcci0BKBfV/Untitled?node-id=0-1&t=cFqkvaLssCkDR9qC-1',
+      ),
+      ProjectCard(
+        timeRange: 'July 2025',
         title: 'Fylez - Blockchain based Cloud Storage',
-          description: 'Your files, but make it blockchain! 🔗 Secure, private, and tamper-proof cloud storage that actually respects your privacy.',
+          description: 'Your files, but make it blockchain! Secure, private, and tamper-proof cloud storage that actually respects your privacy.',
         imageUrl: 'assets/images/fylez-proj.png',
         // liveUrl: 'https://cryptotrack.example.com',
         githubUrl: 'https://github.com/nikkhilpareek/fylez',
@@ -94,7 +104,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
       ProjectCard(
         timeRange: 'July 2025',
         title: 'Auth - Minimal Authentication Screens',
-        description: 'Because every app needs auth screens! 🔐 Built this minimal, reusable set so you (and I) never have to start from scratch again.',
+        description: 'Because every app needs auth screens! Built this minimal, reusable set so you (and I) never have to start from scratch again.',
         imageUrl: 'assets/images/auth.png',
         liveUrl: 'https://nikkhilpareek.github.io/Minimal-Auth-Screens-in-Flutter/',
         githubUrl: 'https://github.com/nikkhilpareek/Minimal-Auth-Screens-in-Flutter',
@@ -104,7 +114,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
       ProjectCard(
         timeRange: 'July 2025',
         title: 'Habits - A Minimal Habit Tracker',
-        description: 'Build better habits without the overwhelm! ✨ Clean, minimal design that focuses on what matters - consistency over complexity.',
+        description: 'Build better habits without the overwhelm! Clean, minimal design that focuses on what matters - consistency over complexity.',
         imageUrl: 'assets/images/habits.png',
         // liveUrl: 'https://ecoscan.example.com',
         githubUrl: 'https://github.com/nikkhilpareek/habit',
