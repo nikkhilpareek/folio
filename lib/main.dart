@@ -13,11 +13,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Nikhil's Portfolio",
+      
       debugShowCheckedModeBanner: false,
       theme: ThemeProvider.lightTheme,
       darkTheme: ThemeProvider.darkTheme,
       themeMode: ThemeMode.dark,
-      home: const HomePage(),
+      home: SelectionArea(
+        child: const HomePage(),
+      ),
     );
   }
 }

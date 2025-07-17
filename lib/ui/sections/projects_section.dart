@@ -103,6 +103,15 @@ class _ProjectsSectionState extends State<ProjectsSection> {
       ),
       ProjectCard(
         timeRange: 'July 2025',
+        title: 'Catto! - Cat Fun Facts',
+        description: 'Learn fun cat facts, cute cat images, and purr-fect knowledge to impress fellow cat lovers.',
+        imageUrl: 'assets/images/catto.png', 
+        liveUrl: 'https://nikkhilpareek.github.io/catfacts/',
+        githubUrl: 'https://github.com/nikkhilpareek/catfacts',
+        skills: ['Flutter', 'Dart', 'APIs'],
+      ),
+      ProjectCard(
+        timeRange: 'July 2025',
         title: 'Auth - Minimal Authentication Screens',
         description: 'Because every app needs auth screens! Built this minimal, reusable set so you (and I) never have to start from scratch again.',
         imageUrl: 'assets/images/auth.png',
@@ -120,15 +129,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         githubUrl: 'https://github.com/nikkhilpareek/habit',
         skills: ['Flutter', 'Dart', 'Bloc', 'Material Design'],
       ),
-      ProjectCard(
-        timeRange: 'July 2025',
-        title: 'Calc - A Simple Calculator',
-        description: 'Not the Smartest in Maths, So I built a calculator (which is not very smart either)',
-        imageUrl: 'assets/images/calc.png',
-        liveUrl: 'https://nikkhilpareek.github.io/Calculator-in-Flutter/',
-        githubUrl: 'https://github.com/nikkhilpareek/Calculator-in-Flutter',
-        skills: ['Flutter', 'Dart'],
-      ),
+      
     ];
 
     final projectsToShow = _showAllProjects ? allProjects : allProjects.take(3).toList();

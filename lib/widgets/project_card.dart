@@ -30,7 +30,7 @@ class ProjectCard extends StatefulWidget {
 class _ProjectCardState extends State<ProjectCard> {
   @override
   Widget build(BuildContext context) {
-    final isMobile = MediaQuery.of(context).size.width < 700;
+    final isMobile = MediaQuery.of(context).size.width <= 768;
     return Padding(
       padding: const EdgeInsets.only(bottom: 40),
       child: isMobile
@@ -191,6 +191,8 @@ class _ProjectCardState extends State<ProjectCard> {
   }
 
   Widget _buildFigmaButton() {
+    final isMobile = MediaQuery.of(context).size.width <= 768;
+    
     return OutlinedButton(
       onPressed: widget.figmaUrl != null
           ? () async {
@@ -203,23 +205,34 @@ class _ProjectCardState extends State<ProjectCard> {
       style: OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         textStyle: const TextStyle(fontSize: 14),
+        minimumSize: isMobile ? const Size(44, 36) : null,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Image.asset(
-            'assets/images/figma.png',
-            width: 18,
-            height: 18,
-            errorBuilder: (context, error, stackTrace) => const Icon(
-              Icons.design_services,
-              size: 18,
+      child: isMobile
+          ? Image.asset(
+              'assets/images/figma.png',
+              width: 18,
+              height: 18,
+              errorBuilder: (context, error, stackTrace) => const Icon(
+                Icons.design_services,
+                size: 18,
+              ),
+            )
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/images/figma.png',
+                  width: 18,
+                  height: 18,
+                  errorBuilder: (context, error, stackTrace) => const Icon(
+                    Icons.design_services,
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                const Text('Design'),
+              ],
             ),
-          ),
-          const SizedBox(width: 8),
-          const Text('Design'),
-        ],
-      ),
     );
   }
 }
@@ -237,7 +250,30 @@ class _ProjectImageHoverState extends State<_ProjectImageHover> {
     // Get access to the ProjectCard's imageUrl
     final _ProjectCardState projectCardState = context.findAncestorStateOfType<_ProjectCardState>()!;
     final String imageUrl = projectCardState.widget.imageUrl ?? 'assets/images/placeholder.png';
+    final isMobile = MediaQuery.of(context).size.width <= 768;
     
+    final imageWidget = imageUrl.startsWith('http')
+        ? Image.network(
+            imageUrl,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
+          )
+        : Image.asset(
+            imageUrl,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+            errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
+          );
+
+    // On mobile, show image without hover effects
+    if (isMobile) {
+      return imageWidget;
+    }
+
+    // On desktop/web, apply hover zoom effect
     return MouseRegion(
       onEnter: (_) => setState(() => _hovering = true),
       onExit: (_) => setState(() => _hovering = false),
@@ -245,21 +281,7 @@ class _ProjectImageHoverState extends State<_ProjectImageHover> {
         scale: _hovering ? 1.12 : 1.0,
         duration: const Duration(milliseconds: 200),
         curve: Curves.easeOut,
-        child: imageUrl.startsWith('http')
-            ? Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-                errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
-              )
-            : Image.asset(
-                imageUrl,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-                errorBuilder: (context, error, stackTrace) => _buildPlaceholder(),
-              ),
+        child: imageWidget,
       ),
     );
   }

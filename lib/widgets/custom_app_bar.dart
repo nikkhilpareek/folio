@@ -51,6 +51,12 @@ class CustomAppBar extends StatelessWidget {
                         tooltip: 'Instagram',
                         size: 16,
                       ),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.p,
+                        url: 'https://peerlist.io/nikhilpareek',
+                        tooltip: 'Peerlist',
+                        size: 16,
+                      ),
                     ],
                   )
                 : Row(
@@ -77,6 +83,13 @@ class CustomAppBar extends StatelessWidget {
                         icon: FontAwesomeIcons.instagram,
                         url: 'https://instagram.com/nikkhil.pareek',
                         tooltip: 'Instagram',
+                      ),
+                      const SizedBox(width: 16),
+                      _buildIconBtn(
+                        icon: FontAwesomeIcons.p,
+                        url: 'https://peerlist.io/nikhilpareek',
+                        tooltip: 'Peerlist',
+                        size: 16,
                       ),
                     ],
                   ),
