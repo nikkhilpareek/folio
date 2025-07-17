@@ -25,10 +25,6 @@ class FooterSection extends StatelessWidget {
                 ),
               ),
               const TextSpan(text: ' with a lot of caffeine'),
-              TextSpan(
-                text: ' ☕',
-                style: const TextStyle(fontStyle: FontStyle.normal),
-              ),
             ],
           ),
           textAlign: TextAlign.center,
