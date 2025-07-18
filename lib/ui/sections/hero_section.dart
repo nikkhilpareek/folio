@@ -311,25 +311,14 @@ class _ResumeHoverButtonState extends State<_ResumeHoverButton>
                   color: Colors.transparent,
                   child: InkWell(
                     onTap: () async {
+                      const resumeUrl = 'https://drive.google.com/file/d/1xIW1EVFX4RpnzAcoZklDYVNbgD6gRzxc/view?usp=sharing';
                       try {
-                        // Method 1: Direct URL approach (most reliable)
-                        const resumeUrl = 'assets/resume.pdf';
-                        if (await canLaunchUrl(Uri.parse(resumeUrl))) {
-                          await launchUrl(
-                            Uri.parse(resumeUrl),
-                            mode: LaunchMode.externalApplication,
-                          );
-                        } else {
-                          // Fallback: Use direct window.open for web
-                          html.window.open('assets/resume.pdf', '_blank');
+                        final uri = Uri.parse(resumeUrl);
+                        if (await canLaunchUrl(uri)) {
+                          await launchUrl(uri, mode: LaunchMode.externalApplication);
                         }
                       } catch (e) {
-                        // Final fallback: Direct HTML approach
-                        try {
-                          html.window.open('assets/resume.pdf', '_blank');
-                        } catch (fallbackError) {
-                          print('Error opening resume: $fallbackError');
-                        }
+                        print('Error opening resume: $e');
                       }
                     },
                     onTapDown: (details) {
